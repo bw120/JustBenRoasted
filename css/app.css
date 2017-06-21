@@ -1,0 +1,230 @@
+body {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: #543d2b;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+h2 {
+    color: #543d2b;
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 15px 0 0 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cover-panel {
+    min-height: 100vh;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
+    background-color: #04819e;
+}
+
+.nav {
+    color: #ffffff;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+.nav a {
+    color: #ffffff;
+    font-size: 1em;
+    padding: 15px;
+    transition: all .5s ease;
+}
+
+.nav a:hover {
+    color: #ff7f00;
+    transition: all .5s ease;
+}
+
+.text-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    text-align: center;
+}
+
+.beans {
+    width: 20%;
+    margin: 0 0 20px 0;
+}
+
+.cover-container div {
+    color: #ffffff;
+    font-size: 1.5em;
+    position: relative;
+}
+
+.logo {
+    width: 70%;
+}
+
+.scrollArrow {
+    height: 50px;
+    width: 50px;
+    opacity: 1;
+    transition: opacity .5s ease;
+}
+
+.scrollArrow:hover {
+    height: 50px;
+    opacity: .5;
+    transition: opacity .5s ease;
+
+}
+
+.scrArr-container {
+    position: absolute;
+    width: 50px;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scrArr-txt-container {
+    position: relative;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.img-right,
+.img-left,
+.img-1,
+.img-2,
+.img-3,
+.img-4 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.social-icon {
+    display: inline-block;
+    width: 40px;
+    margin: 15px;
+}
+
+.footer {
+    background-color: #04819e;
+}
+
+.footer-content {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-style: italic;
+    padding: 20px 20px 50px 20px;
+}
+
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+    .text-panel {
+        min-height: 70vh;
+        justify-content: space-between;
+    }
+
+    .cover-panel,
+    .image-panel {
+        height: 30vh;
+        position: relative;
+    }
+
+    .image-panel {
+        border-top: 8px solid #04819e;
+
+    }
+
+    .img-2 {
+        background: url(../images/coffee-roaster.jpg) no-repeat 100% 80%;
+        background-size: 130% auto;
+    }
+
+    .img-3 {
+        background: url(../images/coffee-cup.jpg) no-repeat 100% center;
+        background-size: 120% auto;
+    }
+
+    .img-4 {
+        background: url(../images/coffee-smartphone.jpg) no-repeat 100% center;
+        background-size: 120%;
+    }
+
+    .bg-images {
+        display: none;
+    }
+
+}
+
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+    .text-panel {
+        min-height: 100vh;
+        justify-content: center;
+        background-color: #ffffff;
+    }
+
+    .cover-panel,
+    .image-panel {
+        min-height: 100vh;
+        position: relative;
+
+    }
+
+    .image-panel {
+          position: relative;
+    }
+
+
+   .bg-images {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .img-left {
+        background: #fff url(../images/coffee-bean-cup.jpg) no-repeat 0 center/cover;
+        /*background-size: cover;*/
+    }
+
+    .img-right {
+        background: #fff url(../images/coffee-roaster.jpg) no-repeat 0 center/cover;
+        /*background-size: cover;*/
+    }
+}
+
+
