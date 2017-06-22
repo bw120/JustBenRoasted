@@ -4,17 +4,15 @@ $(document).ready(function() {
 
     //Set element to 100% height of its parent element
     function equalizeHeight(selector, mediaQuery) {
-            var elements = $(selector);
-            $.each(elements, function (key, item) {
-                if (Foundation.MediaQuery.atLeast(mediaQuery)) {
-                    $(item).height($(item).parent().height() + "px");
-                } else {
-                    $(item).removeAttr("style");
-                }
-            });
+        var elements = $(selector);
+        $.each(elements, function(key, item) {
+            if (Foundation.MediaQuery.atLeast(mediaQuery)) {
+                $(item).height($(item).parent().height() + "px");
+            } else {
+                $(item).removeAttr("style");
+            }
+        });
     }
-
-
 
     //scroll down to element position
     var scroller = function(event, element) {
@@ -58,7 +56,7 @@ $(document).ready(function() {
     //swap background images on fixed element on scroll
     //configuration - image to desplay for each module
     var modules = [
-        { id: "mod-cover", img: "url(images/coffee-bean-cup.jpg) no-repeat 0 center/cover"},
+        { id: "mod-cover", img: "url(images/coffee-bean-cup.jpg) no-repeat 0 center/cover" },
         { id: "mod-1", img: "url(images/coffee-onTable.jpg) no-repeat left bottom/cover" },
         { id: "mod-2", img: "url(images/coffee-cup.jpg) no-repeat 75% center/cover" },
         { id: "mod-3", img: "url(images/coffee-smartphone.jpg) no-repeat 70% center/cover" }
@@ -72,7 +70,7 @@ $(document).ready(function() {
         });
 
         coordinates.sort(function(a, b) {
-            return a-b;
+            return a - b;
         });
 
         return function(scrollY) {
@@ -99,13 +97,24 @@ $(document).ready(function() {
         }
         if (currentMod % 2 != 0) {
             img1.style.background = nextMod.img;
-            img2.style.background = modules[currentMod ].img;
+            img2.style.background = modules[currentMod].img;
         }
+    }
+
+    function makeNavFixed(scrollY, element) {
+        if (scrollY > 170) {
+            element.className = "nav-fixed";
+        }
+        if (scrollY <= 100) {
+            element.className = "nav";
+        }
+
     }
 
     var currentScroll = 0;
     var leftImg = document.getElementById('img-left');
-    var rightImg = document.getElementById('img-right')
+    var rightImg = document.getElementById('img-right');
+    var nav = document.getElementById('nav');
     window.onscroll = function() {
         currentScroll = window.scrollY;
     }
@@ -114,6 +123,7 @@ $(document).ready(function() {
         requestAnimationFrame(update);
         if (Foundation.MediaQuery.atLeast("medium")) {
             swapImages(currentModule(currentScroll), modules, leftImg, rightImg);
+            makeNavFixed(currentScroll, nav);
         }
 
     }
@@ -121,13 +131,22 @@ $(document).ready(function() {
     requestAnimationFrame(update);
 
     $(window).resize(function() {
-      equalizeHeight(".image-panel .cover-panel", "medium");
-      currentModule = getModule(modules);
+        equalizeHeight(".image-panel .cover-panel", "medium");
+        currentModule = getModule(modules);
     });
 
+    function hamburgerMenu(hamburger, menu) {
+
+        hamburger.addEventListener("click", function(event) {
+            event.preventDefault();
+            menu.classList.toggle('menu-visible');
+        });
+        hamburger.addEventListener("blur", function() {
+            menu.classList.remove('menu-visible');
+        });
+
+    }
+
+    hamburgerMenu(document.getElementById("hamburger"), document.getElementById("menu"));
+
 });
-
-
-
-
-
