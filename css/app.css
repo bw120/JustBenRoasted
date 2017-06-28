@@ -235,7 +235,7 @@ ul {
         color: #ffffff;
         font-size: 1em;
         vertical-align: middle;
-        padding: 0 10px 3px 10px;
+        padding: 0 8px 3px 8px;
         margin: 10px 0 10px 0;
         border-right: 1px solid #ffffff;
         transition: all .5s ease;
@@ -291,7 +291,7 @@ ul {
     .menu {
         display: inline-block;
         font-size: 1em;
-        margin: 1em;
+        margin: 1em .0 1em 0;
     }
     .text-panel {
         min-height: 100vh;
@@ -321,5 +321,14 @@ ul {
     .img-right {
         background: #fff url(../images/coffee-roaster.jpg) no-repeat 0 center/cover;
         /*background-size: cover;*/
+    }
+}
+
+
+/* minor adjustments for lower range of medium */
+
+@media screen and (min-width: 50em) {
+    .nav a {
+        padding: 0 15px 3px 15px;
     }
 }

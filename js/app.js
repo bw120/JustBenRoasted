@@ -17,18 +17,22 @@ $(document).ready(function() {
     //scroll down to element position
     var scroller = function(event, element) {
         event.preventDefault();
+
         var topOffset = document.getElementById(element).offsetTop;
+        var scrollPos = window.scrollY;
 
         //this variable controlls the speed
-        var scrollAmount = 35;
+        var scrollSpeed = 35;
 
-        var totalScrolled = window.scrollY;
+        //scroll by posity or negative amount depending on if elements position relative
+        //to current position.
+        var scrollAmount = (topOffset - scrollPos >= 0) ? scrollSpeed : scrollSpeed * -1;
 
         var scrollDown = function() {
             if (element) {
-                if (totalScrolled + scrollAmount < topOffset) {
+                if (Math.abs(scrollPos - topOffset) > Math.abs(scrollAmount) ) {
                     window.scrollBy(0, scrollAmount);
-                    totalScrolled = totalScrolled + scrollAmount;
+                    scrollPos = scrollPos + scrollAmount;
                     aFrame = requestAnimationFrame(scrollDown);
                 } else {
                     window.scrollTo(0, topOffset);
