@@ -3,5 +3,4 @@ Website for JustBenRoasted Coffee
 
 
 *TO DO*
-- Images are all high resolution. Have appropriate images swap out based on widow/screen width.
-
+-adjust scroll to allow for nav bar so it doesn't cover headline on some screen sizes. make nav bar opaque to completly black out module above?

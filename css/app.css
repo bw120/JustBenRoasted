@@ -203,16 +203,44 @@ ul {
         border-top: 8px solid #04819e;
     }
     .img-2 {
-        background: url(../images/coffee-roaster.jpg) no-repeat 100% 80%;
+        background: url(../images/coffee-roaster_sm.jpg) no-repeat 100% 80%;
         background-size: 130% auto;
+
+        background-image: -webkit-image-set(
+            url(../images/coffee-roaster_sm.jpg) 1x,
+            url(../images/coffee-roaster_md.jpg) 2x
+        );
+        background-image: image-set(
+            url(../images/coffee-roaster_sm.jpg) 1x,
+            url(../images/coffee-roaster_md.jpg) 2x
+        );
+
     }
     .img-3 {
-        background: url(../images/coffee-cup.jpg) no-repeat 100% center;
+        background: url(../images/coffee-cup_sm.jpg) no-repeat 100% center;
         background-size: 120% auto;
+
+        background-image: -webkit-image-set(
+            url(../images/coffee-cup_sm.jpg) 1x,
+            url(../images/coffee-cup_md.jpg) 2x
+        );
+        background-image: image-set(
+            url(../images/coffee-cup_sm.jpg) 1x,
+            url(../images/coffee-cup_md.jpg) 2x
+        );
     }
     .img-4 {
-        background: url(../images/coffee-smartphone.jpg) no-repeat 100% center;
+        background: url(../images/coffee-smartphone_sm.jpg) no-repeat 100% center;
         background-size: 120%;
+
+        background-image: -webkit-image-set(
+            url(../images/coffee-smartphone_sm.jpg) 1x,
+            url(../images/coffee-smartphone_md.jpg) 2x
+        );
+        background-image: image-set(
+            url(../images/coffee-smartphone_sm.jpg) 1x,
+            url(../images/coffee-smartphone_md.jpg) 2x
+        );
     }
     .bg-images {
         display: none;
@@ -315,15 +343,12 @@ ul {
         z-index: -1;
     }
     .img-left {
-        background: #fff url(../images/coffee-bean-cup.jpg) no-repeat 0 center/cover;
-        /*background-size: cover;*/
+        background: #fff url(../images/coffee-bean-cup_md.jpg) no-repeat 0 center/cover;
     }
     .img-right {
-        background: #fff url(../images/coffee-roaster.jpg) no-repeat 0 center/cover;
-        /*background-size: cover;*/
+        background: #fff url() no-repeat 0 center/cover;
     }
 }
-
 
 /* minor adjustments for lower range of medium */
 

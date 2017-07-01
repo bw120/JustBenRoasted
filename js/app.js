@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 $(document).ready(function() {
     $(document).foundation();
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
 
         var scrollDown = function() {
             if (element) {
-                if (Math.abs(scrollPos - topOffset) > Math.abs(scrollAmount) ) {
+                if (Math.abs(scrollPos - topOffset) > Math.abs(scrollAmount)) {
                     window.scrollBy(0, scrollAmount);
                     scrollPos = scrollPos + scrollAmount;
                     aFrame = requestAnimationFrame(scrollDown);
@@ -56,16 +56,56 @@ $(document).ready(function() {
     });
 
 
+    //configuration for which image to show for each module
+    //includes several sizes of images. Correct image is selected based on screen size and pixel dnsity
+    var images = [
+        { id: "mod-cover", selectedImg: "images/coffee-bean-cup_md.jpg", css: "no-repeat 0 center/cover", size: [{ width: 500, url: "images/coffee-bean-cup_sm.jpg" }, { width: 750, url: "images/coffee-bean-cup_md.jpg" }, { width: 1400, url: "images/coffee-bean-cup_lg.jpg" }] },
+        { id: "mod-1", selectedImg: "images/coffee-onTable_md.jpg", css: "no-repeat left bottom/cover", size: [{ width: 500, url: "images/coffee-onTable_sm.jpg" }, { width: 750, url: "images/coffee-onTable_md.jpg" }, { width: 1400, url: "images/coffee-onTable_lg.jpg" }] },
+        { id: "mod-2", selectedImg: "images/coffee-cup_md.jpg", css: "no-repeat 75% center/cover", size: [{ width: 500, url: "images/coffee-cup_sm.jpg" }, { width: 750, url: "images/coffee-cup_md.jpg" }, { width: 1400, url: "images/coffee-cup_lg.jpg" }] },
+        { id: "mod-3", selectedImg: "images/coffee-smartphone_md.jpg", css: "no-repeat 70% center/cover", size: [{ width: 500, url: "images/coffee-smartphone_sm.jpg" }, { width: 750, url: "images/coffee-smartphone_md.jpg" }, { width: 1400, url: "images/coffee-smartphone_lg.jpg" }] }
+    ];
 
-    //swap background images on fixed element on scroll
-    //configuration - image to desplay for each module
-    var modules = [
-        { id: "mod-cover", img: "url(images/coffee-bean-cup.jpg) no-repeat 0 center/cover" },
-        { id: "mod-1", img: "url(images/coffee-onTable.jpg) no-repeat left bottom/cover" },
-        { id: "mod-2", img: "url(images/coffee-cup.jpg) no-repeat 75% center/cover" },
-        { id: "mod-3", img: "url(images/coffee-smartphone.jpg) no-repeat 70% center/cover" }
-    ]
+    function preloadImages(images) {
+        images.forEach(function(item) {
+            var image = new Image();
+            image.src = item.selectedImg;
+            item.css = "url(" + item.selectedImg + ") " + item.css;
+        });
+    }
 
+    function getScrSizeDensity() {
+        return [window.screen.width, window.devicePixelRatio];
+    }
+
+    function setImgSize(screenProps) {
+
+        //set selected image based provided size
+        function selectImage(size) {
+            images.map(function(item) {
+                for (var i = 0; i < item.size.length; i++) {
+                    if (item.size[i].width > size) {
+                        item.selectedImg = item.size[i].url;
+                        break;
+                    }
+                }
+            });
+        }
+
+        //get image width needed
+        if (screenProps[1] < 2) {
+            selectImage(screenProps[0] / 2);
+        } else {
+            selectImage(screenProps[0]);
+        }
+    }
+
+    var screen = getScrSizeDensity();
+    setImgSize(screen);
+
+    //only preload when larger than mobile.
+    if (screen[0] > 639) {
+        preloadImages(images);
+    }
 
     function getModule(mods, element) {
         var bgEl = element;
@@ -89,19 +129,19 @@ $(document).ready(function() {
         }
     }
 
-    var currentModule = getModule(modules);
+    var currentModule = getModule(images);
 
 
-    function swapImages(currentMod, modules, img1, img2) {
-        var nextMod = modules[currentMod + 1] || modules[currentMod];
+    function swapImages(currentMod, images, img1, img2) {
+        var nextMod = images[currentMod + 1] || images[currentMod];
 
         if (currentMod % 2 === 0) {
-            img1.style.background = modules[currentMod].img;
-            img2.style.background = nextMod.img;
+            img1.style.background = images[currentMod].css;
+            img2.style.background = nextMod.css;
         }
         if (currentMod % 2 != 0) {
-            img1.style.background = nextMod.img;
-            img2.style.background = modules[currentMod].img;
+            img1.style.background = nextMod.css;
+            img2.style.background = images[currentMod].css;
         }
     }
 
@@ -112,13 +152,13 @@ $(document).ready(function() {
         if (scrollY <= 100) {
             element.className = "nav";
         }
-
     }
 
     var currentScroll = 0;
     var leftImg = document.getElementById('img-left');
     var rightImg = document.getElementById('img-right');
     var nav = document.getElementById('nav');
+
     window.onscroll = function() {
         currentScroll = window.scrollY;
     }
@@ -126,7 +166,7 @@ $(document).ready(function() {
     function update() {
         requestAnimationFrame(update);
         if (Foundation.MediaQuery.atLeast("medium")) {
-            swapImages(currentModule(currentScroll), modules, leftImg, rightImg);
+            swapImages(currentModule(currentScroll), images, leftImg, rightImg);
             makeNavFixed(currentScroll, nav);
         }
 
@@ -136,7 +176,12 @@ $(document).ready(function() {
 
     $(window).resize(function() {
         equalizeHeight(".image-panel .cover-panel", "medium");
-        currentModule = getModule(modules);
+        var scr = getScrSizeDensity();
+        setImgSize(scr);
+        if (scr[0] > 639) {
+            preloadImages(images);
+        }
+        currentModule = getModule(images);
     });
 
     function hamburgerMenu(hamburger, menu) {
