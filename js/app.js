@@ -74,7 +74,9 @@ $(document).ready(function() {
     }
 
     function getScrSizeDensity() {
-        return [window.screen.width, window.devicePixelRatio];
+        //get width depending on orientation of device (portrait or landscape);
+        var width = (window.matchMedia("(orientation: portrait)").matches) ? Math.min(window.screen.width, window.screen.height) : Math.max(window.screen.width, window.screen.height);
+        return [width, window.devicePixelRatio];
     }
 
     function setImgSize(screenProps) {
@@ -101,7 +103,6 @@ $(document).ready(function() {
 
     var screen = getScrSizeDensity();
     setImgSize(screen);
-
     //only preload when larger than mobile.
     if (screen[0] > 639) {
         preloadImages(images);
