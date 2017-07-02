@@ -15,10 +15,10 @@ $(document).ready(function() {
     }
 
     //scroll down to element position
-    var scroller = function(event, element) {
+    var scroller = function(event, element, nav) {
         event.preventDefault();
 
-        var topOffset = document.getElementById(element).offsetTop;
+        var topOffset = document.getElementById(element).offsetTop - document.getElementById(nav).offsetHeight;
         var scrollPos = window.scrollY;
 
         //this variable controlls the speed
@@ -46,13 +46,13 @@ $(document).ready(function() {
 
     //configure buttons
     $("#scroll-1, #ourBeans").click(function(event) {
-        scroller(event, "mod-1");
+        scroller(event, "mod-1", "nav");
     });
     $("#scroll-2, #findUs").click(function(event) {
-        scroller(event, "mod-2");
+        scroller(event, "mod-2", "nav");
     });
     $("#scroll-3, #contactUs").click(function(event) {
-        scroller(event, "mod-3");
+        scroller(event, "mod-3", "nav");
     });
 
 

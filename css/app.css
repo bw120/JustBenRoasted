@@ -37,7 +37,7 @@ ul {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2em;
+    padding: 3em 2em;
     text-align: center;
 }
 
@@ -200,7 +200,7 @@ ul {
         position: relative;
     }
     .image-panel {
-        border-top: 8px solid #04819e;
+        border-top: 6px solid #04819e;
     }
     .img-2 {
         background: url(../images/coffee-roaster_sm.jpg) no-repeat 100% 80%;
@@ -285,7 +285,7 @@ ul {
         left: 0;
         right: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: rgba(0, 0, 0, .9);
         padding: .5em 1em .5em 1em;
         z-index: 2;
         color: #ffffff;
@@ -323,7 +323,7 @@ ul {
     }
     .text-panel {
         min-height: 100vh;
-        justify-content: center;
+        justify-content: start;
         background-color: #ffffff;
     }
     .cover-panel,
