@@ -45,6 +45,9 @@ $(document).ready(function() {
     };
 
     //configure buttons
+    $("#home").click(function(event) {
+        scroller(event, "mod-cover", "nav");
+    });
     $("#scroll-1, #ourBeans").click(function(event) {
         scroller(event, "mod-1", "nav");
     });
