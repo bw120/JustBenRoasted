@@ -59,17 +59,18 @@ $(document).ready(function() {
     //configuration for which image to show for each module
     //includes several sizes of images. Correct image is selected based on screen size and pixel dnsity
     var images = [
-        { id: "mod-cover", selectedImg: "images/coffee-bean-cup_md.jpg", css: "no-repeat 0 center/cover", size: [{ width: 500, url: "images/coffee-bean-cup_sm.jpg" }, { width: 750, url: "images/coffee-bean-cup_md.jpg" }, { width: 1400, url: "images/coffee-bean-cup_lg.jpg" }] },
-        { id: "mod-1", selectedImg: "images/coffee-onTable_md.jpg", css: "no-repeat left bottom/cover", size: [{ width: 500, url: "images/coffee-onTable_sm.jpg" }, { width: 750, url: "images/coffee-onTable_md.jpg" }, { width: 1400, url: "images/coffee-onTable_lg.jpg" }] },
-        { id: "mod-2", selectedImg: "images/coffee-cup_md.jpg", css: "no-repeat 75% center/cover", size: [{ width: 500, url: "images/coffee-cup_sm.jpg" }, { width: 750, url: "images/coffee-cup_md.jpg" }, { width: 1400, url: "images/coffee-cup_lg.jpg" }] },
-        { id: "mod-3", selectedImg: "images/coffee-smartphone_md.jpg", css: "no-repeat 70% center/cover", size: [{ width: 500, url: "images/coffee-smartphone_sm.jpg" }, { width: 750, url: "images/coffee-smartphone_md.jpg" }, { width: 1400, url: "images/coffee-smartphone_lg.jpg" }] }
+        { id: "mod-cover", selectedImg: "images/coffee-bean-cup_md.jpg", cssProps: "no-repeat 0 center/cover", size: [{ width: 500, url: "images/coffee-bean-cup_sm.jpg" }, { width: 750, url: "images/coffee-bean-cup_md.jpg" }, { width: 1400, url: "images/coffee-bean-cup_lg.jpg" }] },
+        { id: "mod-1", selectedImg: "images/coffee-onTable_md.jpg", cssProps: "no-repeat left bottom/cover", size: [{ width: 500, url: "images/coffee-onTable_sm.jpg" }, { width: 750, url: "images/coffee-onTable_md.jpg" }, { width: 1400, url: "images/coffee-onTable_lg.jpg" }] },
+        { id: "mod-2", selectedImg: "images/coffee-cup_md.jpg", cssProps: "no-repeat 75% center/cover", size: [{ width: 500, url: "images/coffee-cup_sm.jpg" }, { width: 750, url: "images/coffee-cup_md.jpg" }, { width: 1400, url: "images/coffee-cup_lg.jpg" }] },
+        { id: "mod-3", selectedImg: "images/coffee-smartphone_md.jpg", cssProps: "no-repeat 70% center/cover", size: [{ width: 500, url: "images/coffee-smartphone_sm.jpg" }, { width: 750, url: "images/coffee-smartphone_md.jpg" }, { width: 1400, url: "images/coffee-smartphone_lg.jpg" }] }
     ];
 
     function preloadImages(images) {
+
         images.forEach(function(item) {
             var image = new Image();
             image.src = item.selectedImg;
-            item.css = "url(" + item.selectedImg + ") " + item.css;
+            item.css = "url(" + item.selectedImg + ") " + item.cssProps;
         });
     }
 
@@ -101,6 +102,8 @@ $(document).ready(function() {
         }
     }
 
+
+
     var screen = getScrSizeDensity();
     setImgSize(screen);
     //only preload when larger than mobile.
@@ -108,8 +111,8 @@ $(document).ready(function() {
         preloadImages(images);
     }
 
-    function getModule(mods, element) {
-        var bgEl = element;
+    function getModule(mods) {
+        // var bgEl = element;
         var coordinates = mods.map(function(el, key) {
             return document.getElementById(el.id).offsetTop;
         });
@@ -160,20 +163,28 @@ $(document).ready(function() {
     var rightImg = document.getElementById('img-right');
     var nav = document.getElementById('nav');
 
+    var running = false;
+
     window.onscroll = function() {
         currentScroll = window.scrollY;
+        if (running === false) {
+
+            runAnimation();
+        }
+    }
+
+    function runAnimation() {
+        running = true;
+        requestAnimationFrame(update);
     }
 
     function update() {
-        requestAnimationFrame(update);
         if (Foundation.MediaQuery.atLeast("medium")) {
             swapImages(currentModule(currentScroll), images, leftImg, rightImg);
             makeNavFixed(currentScroll, nav);
         }
-
+        running = false;
     }
-
-    requestAnimationFrame(update);
 
     $(window).resize(function() {
         equalizeHeight(".image-panel .cover-panel", "medium");
