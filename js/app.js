@@ -19,7 +19,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         var topOffset = document.getElementById(element).offsetTop - document.getElementById(nav).offsetHeight;
-        var scrollPos = window.scrollY;
+        var scrollPos = window.pageYOffset;
 
         //this variable controlls the speed
         var scrollSpeed = 35;
@@ -169,7 +169,7 @@ $(document).ready(function() {
     var running = false;
 
     window.onscroll = function() {
-        currentScroll = window.scrollY;
+        currentScroll = window.pageYOffset;
         if (running === false) {
 
             runAnimation();
