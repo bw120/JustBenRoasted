@@ -200,14 +200,18 @@ $(document).ready(function() {
         currentModule = getModule(images);
     });
 
-    function hamburgerMenu(hamburger, menu) {
+    function hamburgerMenu(hamburger, menu, nav) {
 
         hamburger.addEventListener("click", function(event) {
+            console.log("hamb click");
             event.preventDefault();
             menu.classList.toggle('menu-visible');
         });
-        hamburger.addEventListener("blur", function() {
-            menu.classList.remove('menu-visible');
+
+        menu.addEventListener("click", function(event) {
+            console.log("menu click");
+            event.preventDefault();
+            menu.classList.toggle('menu-visible');
         });
 
     }
