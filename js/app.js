@@ -17,8 +17,7 @@ $(document).ready(function() {
     //scroll down to element position
     var scroller = function(event, element, nav) {
         event.preventDefault();
-
-        var topOffset = document.getElementById(element).offsetTop - document.getElementById(nav).offsetHeight;
+        var topOffset = document.getElementById(element).offsetTop + getUiOffset(getScrSizeDensity()) - document.getElementById(nav).offsetHeight;
         var scrollPos = window.pageYOffset;
 
         //this variable controlls the speed
@@ -80,7 +79,8 @@ $(document).ready(function() {
     function getScrSizeDensity() {
         //get width depending on orientation of device (portrait or landscape);
         var width = (window.matchMedia("(orientation: portrait)").matches) ? Math.min(window.screen.width, window.screen.height) : Math.max(window.screen.width, window.screen.height);
-        return [width, window.devicePixelRatio];
+        var height = (window.matchMedia("(orientation: portrait)").matches) ? Math.max(window.screen.width, window.screen.height) : Math.min(window.screen.width, window.screen.height);
+        return [width, window.devicePixelRatio, height];
     }
 
     function setImgSize(screenProps) {
@@ -156,7 +156,7 @@ $(document).ready(function() {
         if (scrollY > 170) {
             element.className = "nav-fixed";
         }
-        if (scrollY <= 100) {
+        if (scrollY <= 170) {
             element.className = "nav";
         }
     }
@@ -191,6 +191,7 @@ $(document).ready(function() {
 
     $(window).resize(function() {
         equalizeHeight(".image-panel .cover-panel", "medium");
+        makeNavFixed(currentScroll, nav);
         var scr = getScrSizeDensity();
         setImgSize(scr);
         if (scr[0] > 639) {
@@ -212,5 +213,13 @@ $(document).ready(function() {
     }
 
     hamburgerMenu(document.getElementById("hamburger"), document.getElementById("menu"));
+
+    //fix for Saari on iOS to add an extra offset on scroll for the url bar
+    function getUiOffset(screenSize) {
+        var safari  = (navigator.userAgent.toLowerCase().indexOf("iphone") >= 0 && navigator.userAgent.toLowerCase().indexOf("crios") < 0) ? true : false;
+        return (safari && screenSize[2] < screenSize[0]) ? screenSize[2] - window.innerHeight : 0;
+    }
+
+
 
 });

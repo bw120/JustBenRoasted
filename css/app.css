@@ -164,6 +164,12 @@ ul {
         opacity: 1;
         transition: opacity .5s ease;
     }
+    .nav-logo img {
+        height: 100%;
+    }
+    .nav-logo a {
+        padding: 0;
+    }
     .menu {
         display: inline-block;
         font-size: 1em;
@@ -188,7 +194,7 @@ ul {
         bottom: 1em;
         width: 1.5em;
         height: 1.5em;
-        background: linear-gradient( to bottom, #ffffff, #ffffff 20%, rgba(0, 0, 0, .8) 20%, rgba(0, 0, 0, .8) 40%, #ffffff 40%, #ffffff 60%, rgba(0, 0, 0, .8) 60%, rgba(0, 0, 0, .8) 80%, #ffffff 80%, #ffffff 100%);
+        background: linear-gradient( to bottom, #ffffff, #ffffff 20%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 40%, #ffffff 40%, #ffffff 60%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 80%, #ffffff 80%, #ffffff 100%);
     }
     .text-panel {
         min-height: 70vh;
@@ -258,7 +264,8 @@ ul {
         left: 0;
         right: 0;
         margin: 0;
-        padding: .5em 1em .5em 1em;
+        padding: .5em 0 .5em 0;
+        height: 76px;
     }
     .nav a {
         color: #ffffff;
@@ -281,11 +288,16 @@ ul {
         opacity: 0;
     }
     .nav-fixed {
+ position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         width: 100%;
+        height: 76px;
         background-color: rgba(0, 0, 0, .9);
         padding: .5em 1em .5em 1em;
         z-index: 2;
@@ -310,10 +322,17 @@ ul {
     }
     .nav-logo {
         display: inline-block;
-        height: 3em;
+        height: 60px;
         float: left;
         opacity: 1;
         transition: opacity .5s ease;
+    }
+    .nav-logo img {
+        height: 80%;
+        margin: 10% 0 10% 0;
+    }
+    .nav-logo a {
+        padding: 0;
     }
     .nav-fixed .menu {
         float: right;
@@ -354,8 +373,9 @@ ul {
 
 /* minor adjustments for lower range of medium */
 
-@media screen and (min-width: 50em) {
+@media screen and (min-width: 39.9376em) and (max-width: 50em) {
     .nav a {
-        padding: 0 15px 3px 15px;
+        font-size: 1em;
+        padding: 0 8px 3px 8px;
     }
 }
